@@ -17,7 +17,7 @@ class Linux_Traversal:
         current_root = "root"
 
         input1 = ""
-        print("SUCCESS: CLEARED : RESET TO ROOT")
+
     # Method to Store temp dictionary to main dictionary.
     def refresh(self,key, new_value):
         if current_root != "root":
@@ -113,6 +113,7 @@ class Linux_Traversal:
             obj1.live()
         else:
             if input1 =="session clear":
+                print("SUCCESS: CLEARED : RESET TO ROOT")
                 obj1.clear_session()
 
             if input1.count(" ") == 0:
