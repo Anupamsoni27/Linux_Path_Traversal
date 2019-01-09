@@ -2,6 +2,7 @@ class Linux_Traversal:
 
     def __init__(self):
        pass
+
     # Method to clear session of Application.
     def clear_session(self):
         self.root = {'key1': 'value1',
@@ -19,6 +20,7 @@ class Linux_Traversal:
         current_root = "root"
         self.path_list = ["root"]
         input1 = ""
+        self.path_record = []
 
     # Method to Store temp dictionary to main dictionary.
     def refresh(self,key, new_value):
@@ -26,11 +28,13 @@ class Linux_Traversal:
             self.root[key] = new_value
         elif current_root == "root":
             self.root = self.temproot
+
     # Method to check key present in pass dictionary or not.
     def check(self, folder_name,temproot):
         if folder_name in temproot.keys():
             return 1
         else:return 0
+
     # Method to check enter command.
     def check_command(self, command):
         if command.startswith("cd ") or command.startswith("rm ") or command.startswith("mkdir ") :
@@ -42,6 +46,7 @@ class Linux_Traversal:
             return 1
 
         else:return 0
+
     # Method to make new directory.
     def mkdir(self,folder_name):
 
@@ -52,12 +57,14 @@ class Linux_Traversal:
             self.temproot[folder_name] = {}
             obj1.refresh(current_root, self.temproot)
             print("SUCCESS: CREATED")
+
     # Method to list all present items in current working directory.
     def ls(self,temproot):
         try:
             print("DIRECTORIES :"+str(list(temproot.keys())))
         except:
             print("EMPTY DIRECTORY ")
+
     # Method to remove for directory from pass temp dictionary.
     def rm(self,key_name):
 
@@ -70,16 +77,19 @@ class Linux_Traversal:
             obj1.refresh(current_root, self.temproot)
             print("SUCCESS: DELETED !")
             pass
+
     # Method to print current working directory.
     def pwd(self):
         print(str(current_root)+ ":/ ")
         pass
+
     # support method of method(cd)
     def m1(self, d, key):
         # print("running m1")
         temproot_m1 = d.get(key)
         # print(self.temp_root)
         return temproot_m1
+
     # Method to go in entered path.
     def cd(self,root, temproot):
         global strpath,current_root
@@ -125,46 +135,33 @@ class Linux_Traversal:
 
         else:
             print("ERROR: INVALID PATH  ")
+        obj1.path_recorder(current_root, self.temproot)
+
     # Method to go one level up.
     def cd_back(self, path):
-        if obj1.check_command(input1) == 1:
-            global strpath,current_root
-            print(path)
-            if path == ["root"]:
-                print("ALREADY IN ROOT")
-            elif path[-2] == "root":
-                print(path[-2])
-                self.temproot = self.root
-                strpath = "root:/"
-            elif path[-2] !=  "root":
-                key = path[-2]
-                parent_of_key = "root"
+        try:
+            global strpath
+            if obj1.check_command(input1) == 1:
                 try:
-                    parent_of_key = path[-3]
+                    self.temproot = self.path_record[-2][1][0]
                 except:
-                    pass
-                print("passing : " + str(key))
-                print(self.parent_root)
-
-                print(":::::::::::::::::::::::::::::::::::::::::::::::::::::::")
-                self.temproot = self.parent_root
-                if parent_of_key != "root":
-
-                    self.parent_root = obj1.m1(self.parent_root, key)
-                # print(self.parent_root)
+                    self.temproot = self.root
+                del self.path_record[-1]
                 strpath = strpath.split("/")[:-2]
                 strpath = str(("/").join(strpath)) + "/"
-                print(strpath)
-                self.path_list = self.path_list.pop()
-                print(self.path_list)
-            # try:
-            #     current_root = path[-3]
-            # except:
-            #     pass
+                if strpath == "/":
+                    strpath = "root:/"
+        except:
+            pass
+    def path_recorder(self,pwd,temproot):
+        row = [pwd], [temproot]
+        self.path_record.append(row)
+
     # Method to take input from user again
     def live(self):
         global cmd_part_2
         global input1, cmd_part_1
+
         input1 = input("$ " + str(strpath))
         if obj1.check_command(input1) ==0:
             print("CANNOT RECOGNIZE INPUT")
