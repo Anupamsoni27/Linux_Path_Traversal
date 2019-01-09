@@ -78,8 +78,7 @@ class Linux_Traversal:
             print("ERROR : NOT EXIST !")
         else:
             self.temproot.pop(key_name, None)
-            print(self.temproot)
-            print(self.root)
+            
             obj1.refresh(current_root, self.temproot)
             print("SUCCESS: DELETED !")
             pass
