@@ -7,17 +7,17 @@ class Linux_Traversal:
     def clear_session(self):
         self.root = {'key1': {'key1a': {'key1aa': {"key1aa.1":""},
                                         'key1ab': {"key1ab.1":""},
-                                        'key1ac': {"key1ac.1":""}},
+                                        'key1ac': {"key1ac.1":""}}},
                      'key2': {'key2a': {'key2aa': {"key2aa.2":""},
                                         'key2ab': {"key2ab.2":""},
-                                        'key2ac': {"key2ac.2":""}},
+                                        'key2ac': {"key2ac.2":""}}},
                      'key3': {'key3a': {'key3aa': {"key3aa.3":""},
                                         'key3ab': {"key3ab.3":""},
-                                        'key3ac': {"key3ac.3":""}},
+                                        'key3ac': {"key3ac.3":""}}},
                      'key4': {'key4a': {'key4aa': {"key4aa.1":""},
                                         'key4ab': {"key4ab.1":""},
                                         'key4ac': {"key4ac.1":""}},
-                              'key4b': 'value4b'}}}}}
+                              'key4b': 'value4b'}}
         self.temproot = self.root
         self.parent_root_1 = self.root
         self.parent_root= self.root
